@@ -14,7 +14,7 @@ The advantage of the last 2 points is, that you can synchronize a folder with a 
 
 ![Screenshot](Documentation/Images/SyncFolder.png?raw=true "SyncFolder")
 
-**This script requires PowerShell Version 5.0**
+**PowerShell Version 5.0 is required**
 
 ## Syntax
 
