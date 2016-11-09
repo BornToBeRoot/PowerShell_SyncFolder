@@ -1,10 +1,11 @@
 # PowerShell - SyncFolder
 
-Synchronize a folder (with subfolder/files) in one direction.
+Synchronize a folder (with subfolder/files) in one direction - optional over a PSSession.
 
 ## Description
 
-Synchronize a folder (with subfolder/files) in one direction. The follwoing options are available:
+Synchronize a folder (with subfolder/files) in one direction - optional over a PSSession. 
+The follwoing options are available:
       
 1. Synchronize two folders on your lokal system
 2. Synchronize a folder from a remote PC over a PSSession with your local system 
