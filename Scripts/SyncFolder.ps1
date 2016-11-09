@@ -17,11 +17,14 @@
       2. From a remote PC over a PSSession with your local system (local drive / network share)
       3. To a remote PC over a PSSession with your local system (local drive / network share)
 
-    The advantage of the last 2 points is, that you can synchronize a folder with a remote PC which is not necessarily a member of an Active Directory domain. Only PowerShell-Remoting must be enabled and if you are not in the same subnet, you have to add on both sides the other client as TrustedHost (WinRM).
+    The advantage of the last 2 points is, that you can synchronize a folder with a remote PC which is not necessarily a member of an Active Directory domain and without connecting a network share. Only PowerShell-Remoting must be enabled and if you are not in the same subnet, you have to add on both sides the other client as TrustedHost (WinRM).
 
     .EXAMPLE    
+    .\SyncFolder.ps1 -Source E:\Temp\DemoSource\ -Destination E:\Temp\DemoDestination\ -Verbose
 
     .EXAMPLE    
+    $Cred = Get-Credential $null
+    .\SyncFolder.ps1 -Source E:\Temp\DemoSource\ -Destination C:\DemoDestination\ -ToSession -ComputerName TEST-DEVICE-01 -Credential $Cred -Verbose
 
     .LINK
     https://github.com/BornToBeRoot/PowerShell_SyncFolder/blob/master/README.md    
@@ -131,7 +134,7 @@ Begin{
 
         foreach($File in $Files2Remove)
         {
-            Write-Verbose -Message "  [-] $($File.ItemPath)"
+            Write-Verbose -Message "[-] $($File.ItemPath)"
             Remove-Item -Path (Join-Path -Path $Path -ChildPath $File.ItemPath) -Force
         }
     }
@@ -150,7 +153,7 @@ Begin{
 
         foreach($Directory in ($Directories2Remove | Sort-Object -Property {$_.ItemPath} -Descending))
         {
-            Write-Verbose -Message "  [-] $($Directory.ItemPath)"
+            Write-Verbose -Message "[-] $($Directory.ItemPath)"
             Remove-Item -Path (Join-Path -Path $Path -ChildPath $Directory.ItemPath) -Force
         }
     }
@@ -169,7 +172,7 @@ Begin{
 
         foreach($Directory in ($Directories2Create | Sort-Object -Property {$_.ItemPath}) )
         {
-            Write-Verbose -Message "  [+] $($Directory.ItemPath)"
+            Write-Verbose -Message "[+] $($Directory.ItemPath)"
             [void](New-Item -Path (Join-Path -Path $Path -ChildPath $Directory.ItemPath) -ItemType Directory)
         }
     }
@@ -395,7 +398,7 @@ Process{
             Write-Verbose "Copy $($Files2Copy.Count) files to destination:"
             foreach($File2Copy in $Files2Copy)
             {
-                Write-Verbose -Message "  [+] $($File2Copy.ItemPath)"
+                Write-Verbose -Message "[+] $($File2Copy.ItemPath)"
                 
                 if($PSCmdlet.ParameterSetName -eq "ToSession")
                 {
@@ -417,7 +420,7 @@ Process{
             Write-Verbose "Overwrite $($Files2Overwrite.Count) files in destination:"
             foreach($File2Overwrite in $Files2Overwrite)
             {
-                Write-Verbose -Message "  [+] $($File2Overwrite.ItemPath)"
+                Write-Verbose -Message "[+] $($File2Overwrite.ItemPath)"
                 
                 if($PSCmdlet.ParameterSetName -eq "ToSession")
                 {
@@ -444,6 +447,8 @@ Process{
         Write-Verbose "Close PSSession with ""$ComputerName""."
         Remove-PSSession -Session $Session
     }
+
+    Write-Verbose "Synchronization completed!"
 }
 
 End{
