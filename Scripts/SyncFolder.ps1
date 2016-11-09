@@ -2,16 +2,17 @@
 # Language     :  PowerShell 5.0
 # Filename     :  SyncFolder.ps1
 # Autor        :  BornToBeroot
-# Description  :  Synchronizes a folder (with subfolder/files) in one direction
+# Description  :  Synchronizes a folder (with subfolder/files) in one direction - optional over a PSSession
 # Repository   :  https://github.com/BornToBeRoot/PowerShell_SyncFolder
 ###############################################################################################################
 
 <#
     .SYNOPSIS
-    Synchronizes a folder (with subfolder/files) in one direction
+    Synchronizes a folder (with subfolder/files) in one direction - optional over a PSSession
 
     .DESCRIPTION
-    Synchronizes a folder (with subfolder/files) in one direction. The follwoing options are available:
+    Synchronizes a folder (with subfolder/files) in one direction optional over a PSSession. 
+    The follwoing options are available:
       
       1. You can synchronize two folders on your lokal system (local drive / network share)
       2. From a remote PC over a PSSession with your local system (local drive / network share)
