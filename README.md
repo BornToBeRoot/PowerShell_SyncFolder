@@ -1,4 +1,4 @@
-# PowerShell - SyncFolder
+# PowerShell script | SyncFolder
 
 Synchronize a folder (with subfolder/files) in one direction - optional over a PSSession.
 
